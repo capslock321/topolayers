@@ -1,0 +1,12 @@
+{
+    "seed": 326,
+    "zoom_aspect": 128,
+    "noise_size": {
+        "x": 2,
+        "y": 2
+    },
+    "background_color": [255, 255, 255, 255],
+    "colors": ["#833ab4", "#1dfdf3", "#fcb045"],
+    "gradient_steps": 12,
+    "luminosity": 0.1
+}
