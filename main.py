@@ -1,3 +1,4 @@
+import os
 import json
 import itertools
 
@@ -32,6 +33,7 @@ with open("config.json", "r") as file:
     luminosity = settings.get("luminosity")
     colors = settings.get("colors")
     seed = settings.get("seed")
+    output_path = settings.get("output_path")
 
 generator = TopographyMap(seed, noise_size, background_color, zoom_aspect)
 noise = sorted(generator.get_noise(zoom_aspect=zoom_aspect).ravel(), reverse=True)
@@ -57,6 +59,6 @@ for rgb, layer in zip(gradient_colors, chunks):
     print(f"Adding layer with color {rgb} and threshold of {max(layer):.2f}.")
     generator.add_layer(rgb, threshold=max(layer))
 
-generator.generate_image(f"./out/dist/{generator.seed}.png")
+generator.generate_image(os.path.join(output_path, f"{generator.seed}.png"))
 print("Topgraphy Map Generated!")
 print(f"Seed: {generator.seed}")
