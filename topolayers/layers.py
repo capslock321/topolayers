@@ -42,7 +42,7 @@ class TopographyMap:
     def __init__(
         self,
         seed: int = None,
-        array_size: np.ndarray = (4, 4),
+        array_size: tuple = (4, 4),
         background_color: tuple = TRANSPARENT,
         zoom_aspect: int = 512,
     ):
@@ -61,7 +61,6 @@ class TopographyMap:
         self.array_size: np.ndarray = array_size
         self.zoom_aspect: int = zoom_aspect
         self.layers: list = []
-        self.noise_array: np.ndarray = None
         if self._is_valid_rgba(background_color):
             # Why does this parameter even exist?
             self.background_color: tuple = background_color

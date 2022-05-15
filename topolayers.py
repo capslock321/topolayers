@@ -31,7 +31,7 @@ generator = TopographyMap(seed, noise_size, background_color, zoom_aspect)
 noise = sorted(generator.get_noise(zoom_aspect=zoom_aspect).ravel(), reverse=True)
 pattern = Patterns(noise, gradient_steps=gradient_steps)
 
-values = pattern.interpolerate_colors(colors=colors, luminosity=luminosity)  # Change method name.
+values = pattern.interpolate_colors(colors=colors, luminosity=luminosity)  # Change method name.
 
 for rgb, layer in values:
     generator.add_layer(rgb, threshold=max(layer))
