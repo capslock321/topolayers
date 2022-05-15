@@ -1,7 +1,8 @@
-from .topolayers import TopographyLayer, TopographyMap
+from .layers import TopographyLayer, TopographyMap
 from .noise import RandomNoise
-from .exceptions import GenerationException, InvalidThreshold, InvalidRGB, LayerRequired
+from .patterns import Patterns
+from .exceptions import InvalidThreshold, InvalidRGB, LayerRequired, InvalidHex
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 __author__ = "capslock321"

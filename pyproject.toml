@@ -1,0 +1,7 @@
+[tool.black]
+line-length = 125
+
+[dependencies]
+Pillow = "^9.1.0"
+numpy = "^1.22.3"
+scipy = "^1.7.2"
