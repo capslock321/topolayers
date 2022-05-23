@@ -103,6 +103,18 @@ class Patterns:
         processed_rgba = [c if c >= 0 else 0 for c in processed_rgba]
         return [int(c) for c in processed_rgba]
 
+    def _chunk_noise(self, colors: list):
+        """Chunks the given noise arrays based on the amount of colors given.
+
+        Args:
+            colors: A list of colors.
+
+        Returns:
+            list: An array of the chunked array.
+        """
+        chunk_length = len(self.noise) // len(colors)
+        return [self.noise[x: x + chunk_length] for x in range(0, len(self.noise), chunk_length)]
+
     def interpolate_colors(self, colors: list, luminosity: float):
         """Interpolates between two different colors.
 
@@ -124,7 +136,6 @@ class Patterns:
                 rgba = list(self.interpolate(rgb_color1, rgb_color2, brightness, opacity=255))
                 gradient_colors.append(self._process_rgba(rgba))
             logger.info(f"Adding layer with start RGB {rgb_color1} and end RGB {rgb_color2}.")
-        chunk_length = len(self.noise) // len(gradient_colors)
-        chunks = [self.noise[x : x + chunk_length] for x in range(0, len(self.noise), chunk_length)]
+        chunks = self._chunk_noise(gradient_colors=gradient_colors)
         logger.info(f"Returning gradient with {len(gradient_colors)} colors and {len(chunks)} chunks.")
         return zip(gradient_colors, chunks)

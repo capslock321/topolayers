@@ -1,13 +1,13 @@
 {
-    "seed": 2022,
+    "seed": 1024,
     "zoom_aspect": 128,
     "noise_size": {
-        "x": 4,
-        "y": 4
+        "x": 8,
+        "y": 8
     },
-    "output_path": "./examples/prod/",
+    "output_path": "./examples/prod",
     "background_color": [255, 255, 255, 255],
-    "colors": ["#00DBDE", "#FC00FF"],
+    "colors": ["#000000", "#FFFFFF"],
     "gradient_steps": 10,
     "luminosity": 0.1
 }

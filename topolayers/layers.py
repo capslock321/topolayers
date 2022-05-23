@@ -27,7 +27,7 @@ import dataclasses
 
 import numpy as np
 from PIL import Image
-from typing import Optional
+from typing import Optional, Union
 
 from .noise import RandomNoise
 from .exceptions import InvalidRGB, LayerRequired, InvalidThreshold
@@ -92,7 +92,7 @@ class TopographyMap:
         noise = RandomNoise(self.seed, self.array_size)
         return noise.process_noise_array(zoom_aspect=zoom_aspect)
 
-    def _preprocess_image(self, zoom_aspect: int = 512, threshold: float = 0.5):
+    def _preprocess_image(self, zoom_aspect: int, threshold: Union[int, float]):
         """Processes the noise map and prepare it for pasting.
 
         Args:
@@ -106,12 +106,11 @@ class TopographyMap:
             InvalidThreshold: If the threshold given is too high or low.
         """
         noise = RandomNoise(self.seed, self.array_size)
-        if 1 <= threshold < 0:
-            # Perhaps I should just remove this.
+        if isinstance(threshold, float) and 1 <= threshold < 0:
             raise InvalidThreshold("Threshold must be a number between 0.0 and 1.0.")
         return noise.process_noise_array(threshold, zoom_aspect)
 
-    def add_layer(self, color: tuple, threshold: float = 0.5) -> None:
+    def add_layer(self, color: tuple, threshold: Union[int, float]) -> None:
         """Adds a layer to the final image. You need at least 1 layer to generate
         an image.
 

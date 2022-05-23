@@ -3,8 +3,7 @@ import time
 import json
 import logging
 
-from topolayers import Patterns
-from topolayers import TopographyMap
+from topolayers import TopographyMap, Patterns
 
 # We can throw good coding practices out the house for this file.
 # For now at least. Also, this works best with high contrast colors.
@@ -31,10 +30,11 @@ generator = TopographyMap(seed, noise_size, background_color, zoom_aspect)
 noise = sorted(generator.get_noise(zoom_aspect=zoom_aspect).ravel(), reverse=True)
 pattern = Patterns(noise, gradient_steps=gradient_steps)
 
-values = pattern.interpolate_colors(colors=colors, luminosity=luminosity)  # Change method name.
+values = pattern.interpolate_colors(colors, luminosity=luminosity)  # Change method name.
 
 for rgb, layer in values:
     generator.add_layer(rgb, threshold=max(layer))
+
 
 if __name__ == "__main__":
     output_path = os.path.join(output_path, f"{generator.seed}.png")
